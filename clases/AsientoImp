@@ -1,0 +1,14 @@
+from Vuelo import Vuelo
+
+class Asiento(Vuelo):
+    def __init__(self, disponible, origen, destino, Avion):
+        super().__init__(origen, destino, Avion)
+        self.__disponible = disponible 
+
+    #Setters y Getters
+    def setDisponible(self, disponible):
+        self.__disponible=disponible
+
+    def getDisponible(self):
+        return(self.__disponible)
+    
