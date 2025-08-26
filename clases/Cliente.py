@@ -1,14 +1,33 @@
 
 class Cliente:
     def __init__(self, apellido, nombre, correo):
-        self.__apellido = apellido
-        self.__nombre = nombre
-        self.__correo = correo 
+        self._apellido = apellido
+        self._nombre = nombre
+        self._correo = correo 
 
-    #Setters y Getters
-    def setDisponible(self, numero):
-        self.__numero=numero
+    @property
+    def apellido(self):
+        return self._apellido
 
-    def getDisponible(self):
-        return(self.__numero)
-    
+    @apellido.setter
+    def apellido(self, value):
+        self._apellido = value
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, value):
+        self._nombre = value
+
+    @property
+    def correo(self):
+        return self._correo
+
+    @correo.setter
+    def correo(self, value):
+        if "@" not in value:
+            raise ValueError("Correo inválido")
+        self._correo = value
+

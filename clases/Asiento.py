@@ -1,22 +1,32 @@
-from Avion import Avion
 
 class Asiento:
-    def __init__(self, numero, estado, nombre, empresa):
-        super().__init__(nombre, empresa)
-        self.numero = numero 
-        self.estado = estado
+    def __init__(self, numero, avion, estado):
+        self._numero = numero
+        self._avion = avion      # instancia de Avion
+        self._estado = estado    # "libre" o "ocupado"
 
-    #Setters y Getters
-    def setNumero(self, numero):
-        self.__numero=numero
+    @property
+    def numero(self):
+        return self._numero
 
-    def getNumero(self):
-        return(self.__numero)
-    
+    @numero.setter
+    def numero(self, value):
+        self._numero = value
 
+    @property
+    def avion(self):
+        return self._avion
 
-    def setEstado(self, estado):
-        self.__estado=estado
+    @avion.setter
+    def avion(self, value):
+        self._avion = value
 
-    def getEstado(self):
-        return(self.__estado)
+    @property
+    def estado(self):
+        return self._estado
+
+    @estado.setter
+    def estado(self, value):
+        if value not in ("libre", "ocupado"):
+            raise ValueError("Estado debe ser 'libre' o 'ocupado'")
+        self._estado = value
