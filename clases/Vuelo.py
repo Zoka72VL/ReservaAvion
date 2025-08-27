@@ -1,6 +1,6 @@
-from Ciudad import Ciudad
-from Avion import Avion
-from AsientoImp import AsientoImplementado
+from clases.Ciudad import Ciudad
+from clases.Avion import Avion
+from clases.AsientoImp import AsientoImp
 
 class Vuelo:
     def __init__(self, origen: Ciudad, destino: Ciudad, avion: Avion):

@@ -1,5 +1,4 @@
-from Asiento import Asiento
-from Vuelo import Vuelo
+from clases.Asiento import Asiento
 
 class AsientoImp(Asiento):
     def __init__(self, numero, avion, estado, vuelo, disponible):
@@ -24,4 +23,9 @@ class AsientoImp(Asiento):
         if not isinstance(value, bool):
             raise ValueError("Disponible debe ser booleano")
         self._disponible = value
-    
+
+
+    def algun_metodo(self):
+        from clases.Vuelo import Vuelo
+        # usa Vuelo aquí
+

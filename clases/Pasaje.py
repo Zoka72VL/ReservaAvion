@@ -1,10 +1,11 @@
-from Cliente import Cliente
-from AsientoImp import AsientoImp
+from clases.Cliente import Cliente
+from clases.AsientoImp import AsientoImp
 
 class Pasaje:
-    def __init__(self, cliente: Cliente, asiento: list[AsientoImp]):
-        self.cliente = cliente  # instancia de cliente
-        self.asiento = asiento  #lista de asiento implementado
+    def __init__(self, cliente, vuelo, asientos):
+        self.cliente = cliente
+        self.vuelo = vuelo
+        self._asientos = asientos  # Inicializa el atributo privado
     
     @property
     def cliente(self):
@@ -30,7 +31,7 @@ class Pasaje:
         print(f"Pasaje de {self._cliente.nombre} {self._cliente.apellido}")
         print(f"Correo: {self._cliente.correo}")
         print("Asientos asignados:")
-        for asiento in self._asientos:
+        for asiento in self.asientos:
             estado = "Disponible" if asiento._disponible else "No disponible"
             print(f" - Asiento {asiento._numero}: {asiento._estado} ({estado})")
 
@@ -40,12 +41,12 @@ class Pasaje:
         Reserva 'cantidad' de asientos libres para el cliente en el vuelo dado.
         Marca cada asiento como ocupado y devuelve una instancia de Pasaje.
         """
-        libres = vuelo._obtener_asientos_disponibles()
+        libres = vuelo.obtener_asientos_disponibles()
         if len(libres) < cantidad:
             raise ValueError("No hay suficientes asientos disponibles")
         seleccion = libres[:cantidad]
         for asiento in seleccion:
             asiento.disponible = False
             asiento.estado = "ocupado"
-        return cls(cliente, seleccion)
+        return cls(cliente, vuelo, seleccion)
 

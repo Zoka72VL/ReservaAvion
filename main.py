@@ -1,4 +1,5 @@
 from clases.Cliente import Cliente
+from clases.Asiento import Asiento
 from clases.Ciudad import Ciudad
 from clases.Avion import Avion
 from clases.Vuelo import Vuelo

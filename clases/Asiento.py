@@ -1,4 +1,3 @@
-
 class Asiento:
     def __init__(self, numero, avion, estado):
         self._numero = numero

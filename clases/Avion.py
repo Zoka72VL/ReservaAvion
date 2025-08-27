@@ -1,4 +1,4 @@
-from Asiento import Asiento
+from clases.Asiento import Asiento
 
 class Avion:
     def __init__(self, nombre, empresa, asientos=None):
