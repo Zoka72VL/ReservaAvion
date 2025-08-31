@@ -14,26 +14,38 @@ destino = Ciudad("Córdoba", "Córdoba", "Argentina")
 avion = Avion("Airbus A320", "LATAM")
 vuelo = Vuelo(origen, destino, avion)
 
-# Crear asientos implementados para ese vuelo
-asientos = [
-    AsientoImp(i, avion, "libre", vuelo, True)
-    for i in range(1, 11)
-]
+# Ingresar asientos por teclado
+asientos = []
+capacidad = 10
+
+for i in range(1, capacidad + 1):
+    asientos.append(AsientoImp(i, avion, "libre", vuelo, True))
 avion.asientos = asientos
 
-# Crear cliente
-cliente = Cliente("González", "María", "maria.gonzalez@mail.com")
+while True:
+    disponibles = vuelo.obtener_asientos_disponibles()
+    if not disponibles:
+        print("¡El avión está lleno! No se pueden reservar más pasajes.")
+        break
 
-# Listar antes de reservar
-print("Asientos disponibles antes:")
-print([a.numero for a in vuelo.obtener_asientos_disponibles()])
+    print(f"\nAsientos disponibles: {[a.numero for a in disponibles]}")
+    nombre = input("Ingrese nombre del cliente: ")
+    apellido = input("Ingrese apellido del cliente: ")
+    correo = input("Ingrese correo del cliente: ")
+    cliente = Cliente(apellido, nombre, correo)
 
-# Cliente reserva 3 pasajes
-pasaje = Pasaje.reservar(cliente, vuelo, 3)
+    while True:
+        try:
+            cantidad = int(input(f"Ingrese cantidad de asientos a reservar (máximo {len(disponibles)}): "))
+            if cantidad < 1 or cantidad > len(disponibles):
+                print("Cantidad inválida.")
+                continue
+            break
+        except ValueError:
+            print("Ingrese un número válido.")
 
-# Mostrar el pasaje y su reserva
-pasaje.mostrar_info()
+    pasaje = Pasaje.reservar(cliente, vuelo, cantidad)
+    pasaje.mostrar_info()
 
-# Listar después de reservar
-print("\nAsientos disponibles después:")
-print([a.numero for a in vuelo.obtener_asientos_disponibles()])
+print("\nReservas finalizadas. Asientos ocupados:")
+print([a.numero for a in avion.asientos if not a.disponible])
